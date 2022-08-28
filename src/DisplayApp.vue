@@ -1,10 +1,10 @@
 <script setup>
-//import Login from './components/Login.vue'
+    import Selection from './components/Selection.vue'
 
 </script>
 
 <template>
-  <div>Display</div>
+    <Selection />
 </template>
 
 <style scoped>
