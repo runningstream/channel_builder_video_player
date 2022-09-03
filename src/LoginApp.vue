@@ -1,12 +1,13 @@
 <script setup>
-import Login from './components/Login.vue'
-
+    import PageBase from './components/PageBase.vue';
+    import Login from './components/Login.vue';
 </script>
 
 <template>
-  <Login />
+    <PageBase>
+        <Login />
+    </PageBase>
 </template>
 
 <style scoped>
-
 </style>

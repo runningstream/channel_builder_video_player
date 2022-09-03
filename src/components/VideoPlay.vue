@@ -4,7 +4,6 @@
 
 <template>
     <div>
-        <video controls :src=" video.url "></video>
-        <div>Debug: Play {{ video }}</div>
+        <video controls :src=" video.videourl "></video>
     </div>
 </template>

@@ -1,12 +1,13 @@
 <script setup>
-    import Selection from './components/Selection.vue'
-
+    import PageBase from './components/PageBase.vue';
+    import Selection from './components/Selection.vue';
 </script>
 
 <template>
-    <Selection />
+    <PageBase loggedIn>
+        <Selection />
+    </PageBase>
 </template>
 
 <style scoped>
-
 </style>

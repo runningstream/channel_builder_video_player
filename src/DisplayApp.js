@@ -1,5 +1,7 @@
-import { createApp } from 'vue'
-import './style.css'
-import DisplayApp from './DisplayApp.vue'
+import { createApp } from 'vue';
+import './style.css';
+import DisplayApp from './DisplayApp.vue';
 
-createApp(DisplayApp).mount('#displayApp')
+import { apiAttachToApp } from './api_js/attachAPI.js';
+
+apiAttachToApp(createApp(DisplayApp)).mount('#displayApp');

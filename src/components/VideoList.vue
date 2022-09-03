@@ -3,20 +3,22 @@
 
     const params = defineProps(["videoList"]);
     const emit = defineEmits(["videoSelected"]);
-
-    function select_video( video ) {
-        console.log(video);
-
-        emit("videoSelected", video);
-    }
 </script>
 
 <template>
-    <VideoListEntry v-for="video in videoList"
-        :title = "video.title"
-        :url = "video.url"
-
-        @click = "select_video(video)"
-    />
-    <div>Debug: List</div>
+    <div id="video_list">
+        <VideoListEntry class="video_list_entry"
+            v-for="video in videoList" :video="video"
+            @videoSelected="$emit('videoSelected', $event)"
+        />
+    </div>
 </template>
+
+<style scoped>
+    #video_list .video_list_entry:nth-child(odd) {
+        background: var(--color-teal);
+    }
+    #video_list .video_list_entry:nth-child(even) {
+        background: var(--color-ltolive);
+    }
+</style>
