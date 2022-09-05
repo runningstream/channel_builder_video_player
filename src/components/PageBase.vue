@@ -5,6 +5,7 @@
     import { jump_to_login } from "./Helpers.js";
 
     import Logout from "./Logout.vue";
+    import HelpLink from "./HelpLink.vue";
 
     const props = defineProps({
         // Set this if the page should only be accessible when logged in
@@ -26,6 +27,7 @@
         <div id="header_area">
             <div id="hdr_name">Running Stream</div>
             <div id="mgmt_btns" v-if="loggedIn">
+                <HelpLink />
                 <Logout />
             </div>
         </div>
@@ -110,7 +112,7 @@
         margin-left: auto;
     }
 
-    #mgmt_btns > div {
+    #mgmt_btns > div, #mgmt_btns > a {
         background-size: cover;
         height: 2em;
         width: 2em;

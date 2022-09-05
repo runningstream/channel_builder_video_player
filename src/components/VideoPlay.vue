@@ -4,6 +4,10 @@
 
 <template>
     <div>
-        <video controls :src=" video.videourl "></video>
+        <video controls :src="video.videourl"></video>
     </div>
 </template>
+
+<style scoped>
+    video { width: 100%; }
+</style>
