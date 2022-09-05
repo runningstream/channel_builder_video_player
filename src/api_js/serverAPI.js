@@ -12,7 +12,7 @@ export function apiInitialize() {
 
 export function apiValidateSession() {
     validateInitialized();
-    return axios.get("validate_session_fe");
+    return axios.get("validate_session_di");
 }
 
 
@@ -22,20 +22,24 @@ export function apiAuthenticate(username, password) {
         "username": username,
         "password": password,
     };
-    return axios.post("authenticate_fe", data);
+    return axios.post("authenticate_di", data);
 }
 
 export function apiLogout() {
     validateInitialized();
-    return axios.get("logout_session_fe");
+    return axios.get("logout_session_di");
 }
 
 export function apiGetChannelLists() {
-    return axios.get("get_channel_lists");
+    return axios.get("get_channel_lists_di");
+}
+
+export function apiGetActiveChannel() {
+    return axios.get("get_active_channel_di");
 }
 
 export function apiGetChannelList(list) {
-    return axios.get(`get_channel_list?list_name=${list}`);
+    return axios.get(`get_channel_list_di?list_name=${list}`);
 }
 
 function validateInitialized() {
