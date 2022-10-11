@@ -16,6 +16,6 @@
 
 <style scoped>
     div {
-        background-image: url(img/logout.svg);
+        background-image: url(/img/logout.svg);
     }
 </style>

@@ -3,5 +3,5 @@
 </template>
 
 <style scoped>
-    #help_button { background-image: url(img/information.svg); }
+    #help_button { background-image: url(/img/information.svg); }
 </style>
