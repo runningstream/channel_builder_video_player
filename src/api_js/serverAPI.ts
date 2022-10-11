@@ -4,19 +4,30 @@
 
 import { inject } from "vue";
 
-let axios = undefined;
+export interface VideoType {
+    name?: string,
+    type?: string,
+    image?: string,
+    videourl?: string,
+    entries?: Array<VideoType>,
+}
+export interface ChannelData {
+    data: { entries: Array<VideoType>, },
+}
 
-export function apiInitialize() {
+let axios: any = undefined;
+
+export function apiInitialize() : void{
     axios = inject("axios");
 }
 
-export function apiValidateSession() {
+export function apiValidateSession() : Promise<void> {
     validateInitialized();
     return axios.get("validate_session_di");
 }
 
 
-export function apiAuthenticate(username, password) {
+export function apiAuthenticate(username: string, password: string) : Promise<void> {
     validateInitialized();
     const data = {
         "username": username,
@@ -25,24 +36,24 @@ export function apiAuthenticate(username, password) {
     return axios.post("authenticate_di", data);
 }
 
-export function apiLogout() {
+export function apiLogout() : Promise<void> {
     validateInitialized();
     return axios.get("logout_session_di");
 }
 
-export function apiGetChannelLists() {
+export function apiGetChannelLists() : Promise<string[]> {
     return axios.get("get_channel_lists_di");
 }
 
-export function apiGetActiveChannel() {
+export function apiGetActiveChannel() : Promise<ChannelData> {
     return axios.get("get_active_channel_di");
 }
 
-export function apiGetChannelList(list) {
+export function apiGetChannelList(list: string) : Promise<ChannelData> {
     return axios.get(`get_channel_list_di?list_name=${list}`);
 }
 
-function validateInitialized() {
+function validateInitialized() : void {
     if ( axios === undefined ) {
         console.error("axios is undefined - run apiInitialize in component setup");
     }

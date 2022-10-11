@@ -1,11 +1,13 @@
-<script setup>
+<script setup lang="ts">
     import VideoList from "./VideoList.vue";
+
+    import type { VideoType } from "../api_js/serverAPI";
 
     const params = defineProps(["entry"]);
 
     const emit = defineEmits(["videoSelected"]);
 
-    function select_video( entry ) {
+    function select_video( entry: VideoType ) {
         if( entry.type == "video" ) {
             emit("videoSelected", entry);
         }
@@ -42,8 +44,8 @@
     .vidlistentry {
         cursor: pointer;
         border: 1px var(--color-ltolive) solid;
-        border-radius: 20px;
-        padding: 20px;
+        border-radius: 5px;
+        padding: 5px;
     }
 
     img {

@@ -1,8 +1,8 @@
-<script setup>
+<script setup lang="ts">
     const params = defineProps(["channelList"]);
     const emit = defineEmits(["channelSelected"]);
 
-    function channel_selected(channel) {
+    function channel_selected(channel: string) {
         emit("channelSelected", channel);
     }
 </script>

@@ -1,8 +1,8 @@
-<script setup>
+<script setup lang="ts">
     import { onMounted } from "vue";
 
-    import { apiInitialize, apiValidateSession } from "../api_js/serverAPI.js";
-    import { jump_to_login } from "./Helpers.js";
+    import { apiInitialize, apiValidateSession } from "../api_js/serverAPI";
+    import { jump_to_login } from "./Helpers";
 
     import Logout from "./Logout.vue";
     import HelpLink from "./HelpLink.vue";
@@ -17,7 +17,7 @@
     onMounted( () => {
         if( props.loggedIn ) {
             apiValidateSession()
-                .catch( (error) => { jump_to_login(); } );
+                .catch( (error: any) => { jump_to_login(); } );
         }
     });
 </script>
@@ -25,7 +25,7 @@
 <template>
     <div>
         <div id="header_area">
-            <div id="hdr_name">Running Stream</div>
+            <div id="hdr_name" v-if="loggedIn">Running Stream</div>
             <div id="mgmt_btns" v-if="loggedIn">
                 <HelpLink />
                 <Logout />
@@ -44,6 +44,12 @@
         --color-ltolive: #e7e8d1;
         --color-teal: #a7beae;
         --color-ltteal: #dbeee1;
+    }
+
+    /* Quick reset */
+    *, *::before, *::after {
+        margin: 0;
+        box-sizing: border-box;
     }
 
     .bigger_text {
@@ -85,6 +91,34 @@
     input[type="submit"]:active, input[type="button"]:active, .input_button:active {
         box-shadow: inset 5px 5px var(--color-dkscarlet);
     }
+
+    a {
+        color: inherit;
+    }
+
+    h1 {
+        font-size: 5em;
+        font-weight: bold;
+    }
+
+    h2 {
+        font-size: 2em;
+        font-weight: bold;
+    }
+
+    h3 {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    @media (max-width: 700px) {
+        h1 {
+            font-size: 3em;
+        }
+        h3 {
+            font-size: 1.5em;
+        }
+    }
 </style>
 
 <style scoped>
@@ -118,6 +152,7 @@
         width: 2em;
         cursor: pointer;
         text-decoration: none;
+        margin-right: .5em;
     }
 
     #screen_area {

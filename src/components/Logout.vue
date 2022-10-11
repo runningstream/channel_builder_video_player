@@ -1,11 +1,11 @@
-<script setup>
-    import { apiInitialize, apiLogout, apiValidateSession } from "../api_js/serverAPI.js";
-    import { jump_to_login, notify_error } from "./Helpers.js";
+<script setup lang="ts">
+    import { apiInitialize, apiLogout, apiValidateSession } from "../api_js/serverAPI";
+    import { jump_to_login, notify_error } from "./Helpers";
 
     function logout() {
         apiLogout()
             .then( jump_to_login )
-            .catch( (error) => { notify_error(`Logout failure: ${error}`); } );
+            .catch( (error: any) => { notify_error(`Logout failure: ${error}`); } );
     }
 </script>
 

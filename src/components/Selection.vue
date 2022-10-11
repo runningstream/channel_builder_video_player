@@ -1,30 +1,35 @@
-<script setup>
+<script setup lang="ts">
     import { ref, onMounted } from "vue";
-    import { notify_error } from "./Helpers.js";
+    import { notify_error } from "./Helpers";
 
-    import { apiGetActiveChannel, apiGetChannelList } from "../api_js/serverAPI.js";
+    import type { Ref } from "vue";
+    import type { VideoType } from "../api_js/serverAPI";
+
+    import { apiGetActiveChannel, apiGetChannelList } from "../api_js/serverAPI";
 
     import VideoList from "./VideoList.vue";
     import ChannelList from "./ChannelList.vue";
     import VideoPlay from "./VideoPlay.vue";
 
-    const channel_list = ref([]);
-    const video_selected = ref("");
-
-    //const channel_list_list = ref([""]);
-    //const channel_selected = ref("");
+    const channel_list: Ref<Array<VideoType>> = ref([]);
+    const video_selected: Ref<VideoType> = ref({});
 
     onMounted( get_active_channel );
 
-    function select_video( video ) {
+    function select_video( video: VideoType ) : void {
         video_selected.value = video;
-        window.scrollTo(0, window.document.querySelector("#vidplay").offsetTop);
+        const vidplay = window.document.querySelector("#vidplay") as HTMLDivElement | null;
+        if( vidplay != null ) {
+            window.scrollTo(0, vidplay.offsetTop);
+        }
     }
 
-    function get_active_channel( channel ) {
-        apiGetActiveChannel(channel)
-            .then( (chan_list) => { channel_list.value = chan_list.data.entries; } )
-            .catch( (error) => { notify_error(`Error getting channel channel: ${error}`); } );
+    function get_active_channel() : void {
+        apiGetActiveChannel()
+            .then( (chan_list) => {
+                channel_list.value = chan_list.data.entries;
+            } )
+            .catch( (error: any) => { notify_error(`Error getting channel channel: ${error}`); } );
     }
 </script>
 

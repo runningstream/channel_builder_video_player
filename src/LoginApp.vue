@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
     import PageBase from './components/PageBase.vue';
     import Login from './components/Login.vue';
 </script>
