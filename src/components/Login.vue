@@ -89,12 +89,38 @@
     section {
         text-align: center;
     }
-    #intro, #links {
+    #intro {
+        position: relative;
+        width: 100%;
+        min-height: min-content;
+        color: var(--color-ltolive);
+        text-shadow: 10px 0px 20px black, -10px 0px 20px black;
+    }
+    #links {
         background-color: var(--color-scarlet);
         color: var(--color-ltolive);
     }
     #intro, #login, #links {
         padding: 100px 25px;
+    }
+    #intro:before, #intro:after {
+        content: "";
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+    }
+    #intro:before {
+        z-index: -2;
+        background-color: black;
+    }
+    #intro:after {
+        z-index: -1;
+        background-image: url(/img/busy_city.jpg);
+        background-position: center;
+        background-size: cover;
+        filter: blur(1px);
     }
     #links a {
         display: block;
