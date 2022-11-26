@@ -4,7 +4,7 @@
 </script>
 
 <template>
-    <PageBase loggedIn>
+    <PageBase loggedIn showTitle>
         <Selection />
     </PageBase>
 </template>

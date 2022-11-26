@@ -1,11 +1,17 @@
 <script setup lang="ts">
     import { ref, onMounted } from "vue";
+    import Alert from "./Alert.vue";
+    import Spinner from "./Spinner.vue";
 
     import { apiValidateSession, apiAuthenticate } from "../api_js/serverAPI";
     import { jump_to_after_login, notify_error } from "./Helpers";
 
     const username = ref("");
     const password = ref("");
+    
+    const alert_login_succ_val_fail = ref(false);
+    const alert_login_fail = ref(false);
+    const show_spinner = ref(false);
 
     onMounted(() => {
         apiValidateSession()
@@ -14,15 +20,23 @@
     });
 
     function form_submit(_ev: Event) {
+        show_spinner.value = true;
         apiAuthenticate(username.value, password.value)
             .then( () => {
                 apiValidateSession()
-                    .then( () => { jump_to_after_login(); } )
-                    .catch( (error: any) => {
-                        notify_error(`Logged in, but validation error: ${error}`);
+                    .then( () => {
+                        show_spinner.value = false;
+                        jump_to_after_login();
+                    } )
+                    .catch( (_error: any) => {
+                        show_spinner.value = false;
+                        alert_login_succ_val_fail.value = true;
                     } );
             })
-            .catch( (error: any) => { notify_error(`Login failed: ${error}`); } );
+            .catch( (_error: any) => {
+                show_spinner.value = false
+                alert_login_fail.value = true;
+            });
     }
 </script>
 
@@ -56,6 +70,16 @@
             <a href="https://docs.runningstream.cc/">Getting Started</a>
         </h3>
     </section>
+
+    <Alert
+        text="Login success but validation failure for unknown reason.  Please refresh the page and try to login again."
+        :display="alert_login_succ_val_fail" @closeModal="alert_login_succ_val_fail=false"
+    />
+    <Alert
+        text="Login failed."
+        :display="alert_login_fail" @closeModal="alert_login_fail=false"
+    />
+    <Spinner :display="show_spinner" />
 </template>
 
 <style scoped>
