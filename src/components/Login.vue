@@ -2,22 +2,22 @@
     import { ref, onMounted } from "vue";
 
     import { apiValidateSession, apiAuthenticate } from "../api_js/serverAPI";
-    import { jump_to_display, notify_error } from "./Helpers";
+    import { jump_to_after_login, notify_error } from "./Helpers";
 
     const username = ref("");
     const password = ref("");
 
     onMounted(() => {
         apiValidateSession()
-            .then( () => { jump_to_display(); } )
-            .catch( (error: any) => { /* Validation failed, so allow login */ } );
+            .then( () => { jump_to_after_login(); } )
+            .catch( (_error: any) => { /* Validation failed, so allow login */ } );
     });
 
-    function form_submit(ev: Event) {
+    function form_submit(_ev: Event) {
         apiAuthenticate(username.value, password.value)
             .then( () => {
                 apiValidateSession()
-                    .then( () => { jump_to_display(); } )
+                    .then( () => { jump_to_after_login(); } )
                     .catch( (error: any) => {
                         notify_error(`Logged in, but validation error: ${error}`);
                     } );

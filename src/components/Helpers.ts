@@ -1,5 +1,7 @@
-export function jump_to_display() {
-    jump_to_page("./display.html");
+import { after_login_page } from '../CB_Config';
+
+export function jump_to_after_login() {
+    jump_to_page(after_login_page);
 }
 
 export function jump_to_login() {

@@ -5,7 +5,7 @@
         video: VideoType,
     }>();
 
-    function play_video(ev: Event) : void {
+    function play_video(_ev: Event) : void {
         if( event != null && event.target != null ) {
             (event.target as HTMLVideoElement).play();
         }
