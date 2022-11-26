@@ -12,5 +12,8 @@ export default defineConfig({
         display: resolve(__dirname, "display.html"),
       }
     }
+  },
+  define: {
+    __APP_VERSION__: JSON.stringify(require('./package.json').version),
   }
 })

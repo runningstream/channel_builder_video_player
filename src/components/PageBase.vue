@@ -7,6 +7,8 @@
     import Logout from "./Logout.vue";
     import HelpLink from "./HelpLink.vue";
 
+    const app_version = __APP_VERSION__;
+
     const props = defineProps({
         // Set this if the page should only be accessible when logged in
         loggedIn: Boolean,
@@ -17,13 +19,13 @@
     onMounted( () => {
         if( props.loggedIn ) {
             apiValidateSession()
-                .catch( (error: any) => { jump_to_login(); } );
+                .catch( (_error: any) => { jump_to_login(); } );
         }
     });
 </script>
 
 <template>
-    <div>
+    <div :app-ver="app_version">
         <div id="header_area">
             <div id="hdr_name" v-if="loggedIn">Running Stream</div>
             <div id="mgmt_btns" v-if="loggedIn">

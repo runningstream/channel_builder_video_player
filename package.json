@@ -1,7 +1,7 @@
 {
-  "name": "vite-vue-starter",
+  "name": "channel_builder_video_player",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
